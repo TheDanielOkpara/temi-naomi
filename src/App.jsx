@@ -204,101 +204,33 @@ const styles = `
     text-align: center;
   }
 
-  /* Animated warm atmosphere — the "room" you're entering */
+  /* Hero photo background */
   .hero-atmosphere {
     position: absolute;
     inset: 0;
     z-index: 0;
   }
-
-  /* When a real photo or video is available, replace this with:
-     <video autoPlay muted loop playsInline style="object-fit:cover;width:100%;height:100%">
-       <source src="/your-video.mp4" type="video/mp4" />
-     </video>
-     Or: <img src="/hero.jpg" style="object-fit:cover;width:100%;height:100%" alt="" />
-     Then remove the .hero-ember-* animations below. */
-  .hero-atmosphere-bg {
+  .hero-bg-img {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 70% at 50% 60%, #1a0e07 0%, #0d0b09 70%);
-    animation: atmospherePulse 8s ease-in-out infinite;
-  }
-  @keyframes atmospherePulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.75; }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
   }
 
-  /* Drifting ember lights — cinematic warmth without a photo */
-  .hero-ember {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    animation: emberFloat linear infinite;
-    background: radial-gradient(circle, rgba(212,168,71,0.18) 0%, transparent 70%);
-  }
-  .hero-ember-1 {
-    width: 600px; height: 600px;
-    top: -100px; left: -150px;
-    animation-duration: 20s;
-    animation-delay: 0s;
-  }
-  .hero-ember-2 {
-    width: 500px; height: 500px;
-    bottom: -80px; right: -100px;
-    animation-duration: 25s;
-    animation-delay: -8s;
-    background: radial-gradient(circle, rgba(107,58,42,0.22) 0%, transparent 70%);
-  }
-  .hero-ember-3 {
-    width: 400px; height: 400px;
-    top: 30%; left: 55%;
-    animation-duration: 18s;
-    animation-delay: -4s;
-    background: radial-gradient(circle, rgba(212,168,71,0.1) 0%, transparent 70%);
-  }
-  @keyframes emberFloat {
-    0%   { transform: translate(0, 0) scale(1); }
-    33%  { transform: translate(30px, -20px) scale(1.05); }
-    66%  { transform: translate(-20px, 15px) scale(0.95); }
-    100% { transform: translate(0, 0) scale(1); }
-  }
-
-  /* Overlay to deepen the atmosphere — stays whether bg is CSS or photo */
+  /* Cinematic overlay — deepens the photo, keeps text legible */
   .hero-veil {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(13,11,9,0.35) 0%,
-      rgba(13,11,9,0.15) 40%,
-      rgba(13,11,9,0.55) 100%
+      rgba(13,11,9,0.45) 0%,
+      rgba(13,11,9,0.2)  30%,
+      rgba(13,11,9,0.5)  70%,
+      rgba(13,11,9,0.88) 100%
     );
     z-index: 1;
-  }
-
-  /* Photo/video slot indicator — shown only in the CSS-only state */
-  .hero-media-hint {
-    position: absolute;
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
-    z-index: 1;
-    text-align: center;
-    opacity: 0.18;
-    pointer-events: none;
-  }
-  .hero-media-hint-frame {
-    width: 240px;
-    height: 320px;
-    border: 1px solid var(--gold);
-  }
-  .hero-media-hint-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 0.75rem;
-    font-family: var(--font-body);
   }
 
   .hero-content {
@@ -1133,20 +1065,14 @@ const GoldRule = () => <div className="gold-rule" />;
 // ============================================================
 const Hero = () => (
   <section id="hero">
-    {/* Atmosphere — swap this block for a <video> or <img> when assets are ready */}
     <div className="hero-atmosphere">
-      <div className="hero-atmosphere-bg" />
-      <div className="hero-ember hero-ember-1" />
-      <div className="hero-ember hero-ember-2" />
-      <div className="hero-ember hero-ember-3" />
+      <img
+        src="/hero-portrait.jpg"
+        alt=""
+        className="hero-bg-img"
+      />
     </div>
     <div className="hero-veil" />
-
-    {/* Subtle photo/video slot indicator — remove once real asset is added */}
-    <div className="hero-media-hint">
-      <div className="hero-media-hint-frame" />
-      <p className="hero-media-hint-label">Photo / Video</p>
-    </div>
 
     <div className="hero-content">
       <p className="hero-pre">Temi Naomi</p>
@@ -1175,22 +1101,40 @@ const Hero = () => (
 // VOICE — who she is, why she tells stories
 // ============================================================
 const Voice = () => {
-  const r = useFadeUp();
+  const r1 = useFadeUp(), r2 = useFadeUp();
   return (
     <section id="voice">
-      <div className="voice-inner fade-up" ref={r}>
-        <p className="eyebrow">Why I Tell Stories</p>
-        <blockquote className="voice-quote">
-          I believe understanding how we became who we are allows us to consciously choose who we want to become.
-        </blockquote>
-        <div className="voice-line" />
-        <p className="voice-body">
-          Through storytelling, performance, visual art, and conversation, my work explores the cultures, histories, memories, beliefs, and experiences that shape identity.
-          <br /><br />
-          I am interested in the stories we inherit — from family, community, faith, culture, and lived experience — and the ways those stories influence how we see ourselves and the world around us.
-          <br /><br />
-          <em style={{ color: "var(--parchment)", fontFamily: "var(--font-display)", fontStyle: "italic" }}>Because before we decide what to carry forward, we must first understand what shaped us.</em>
-        </p>
+      <div style={{
+        maxWidth: "1140px", margin: "0 auto", padding: "0 2.5rem",
+        display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "6rem", alignItems: "center"
+      }}>
+        <div className="fade-up" ref={r1}>
+          <img
+            src="/about-portrait.jpg"
+            alt="Temi Naomi portrait"
+            style={{
+              width: "100%",
+              aspectRatio: "3/4",
+              objectFit: "cover",
+              objectPosition: "center top",
+              display: "block"
+            }}
+          />
+        </div>
+        <div className="fade-up" ref={r2}>
+          <p className="eyebrow">Why I Tell Stories</p>
+          <blockquote className="voice-quote" style={{ textAlign: "left", fontSize: "clamp(1.6rem,3vw,2.6rem)" }}>
+            I believe understanding how we became who we are allows us to consciously choose who we want to become.
+          </blockquote>
+          <div className="voice-line" style={{ margin: "2rem 0" }} />
+          <p className="voice-body" style={{ textAlign: "left" }}>
+            Through storytelling, performance, visual art, and conversation, my work explores the cultures, histories, memories, beliefs, and experiences that shape identity.
+            <br /><br />
+            I am interested in the stories we inherit — from family, community, faith, culture, and lived experience — and the ways those stories influence how we see ourselves and the world around us.
+            <br /><br />
+            <em style={{ color: "var(--parchment)", fontFamily: "var(--font-display)", fontStyle: "italic" }}>Because before we decide what to carry forward, we must first understand what shaped us.</em>
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -1226,14 +1170,12 @@ const BWWB = () => {
           <a href="#branches" className="btn btn-ghost">Explore The Story Branches</a>
         </div>
 
-        {/* Performance image — replace inner div with <img> once asset is ready */}
         <div className="bwwb-media fade-up" ref={r2}>
-          <div className="media-placeholder">
-            <span className="media-placeholder-label">
-              [Replace: Stage performance photo — two performers, white costumes,<br />
-              warm blue-amber lighting — from Celebrating Black Brilliance]
-            </span>
-          </div>
+          <img
+            src="/bwwb-dance.jpg"
+            alt="Temi Naomi performing — movement, live percussion, audience"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+          />
         </div>
       </div>
     </section>
@@ -1309,14 +1251,13 @@ const Performance = () => {
           </h2>
         </div>
 
-        {/* Video slot — replace with <video> or <iframe> embed when available */}
+        {/* Stage image — swap for a <video> embed when footage is available */}
         <div className="perf-media fade-up" ref={r2}>
-          <div className="video-placeholder">
-            <div className="video-play">
-              <div className="video-triangle" />
-            </div>
-            <span className="video-caption">[Replace: Performance clip — embed YouTube video when available]</span>
-          </div>
+          <img
+            src="/performance-stage.jpg"
+            alt="Temi Naomi performing live on stage with microphone and audience"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
+          />
         </div>
 
         <div className="perf-columns">
@@ -1373,8 +1314,19 @@ const Performance = () => {
 // ============================================================
 const QuoteBreak = () => (
   <section id="quote-break">
-    <div className="quote-bg" />
-    <div className="quote-break-content">
+    <img
+      src="/profile-bw.png"
+      alt=""
+      style={{
+        position: "absolute", inset: 0,
+        width: "100%", height: "100%",
+        objectFit: "cover", objectPosition: "center 20%",
+        filter: "brightness(0.22) grayscale(0.3)",
+        zIndex: 0
+      }}
+    />
+    <div className="quote-bg" style={{ zIndex: 1 }} />
+    <div className="quote-break-content" style={{ zIndex: 2 }}>
       <p className="quote-large">"Before the world named us…<br />we were."</p>
       <p className="quote-attr">— Before We Were Broken</p>
     </div>
