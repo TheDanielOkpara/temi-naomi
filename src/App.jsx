@@ -967,24 +967,141 @@ const styles = `
   /* ======================================================
      MOBILE
   ====================================================== */
+  /* ---- VOICE GRID ---- */
+  .voice-grid {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  /* ======================================================
+     TABLET — 900px
+  ====================================================== */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .nav-menu-toggle { display: flex; }
-    .nav { padding: 1.5rem 1.5rem; }
-    .hero-media-hint { display: none; }
-    .booking-inner { grid-template-columns: 1fr; gap: 4rem; }
-    .perf-columns { grid-template-columns: 1fr; gap: 3rem; }
-    .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
-    .branch-item { grid-template-columns: 50px 1fr; gap: 1.5rem; }
+    .nav { padding: 1.25rem 1.5rem; }
+
+    /* Section padding reductions */
+    #voice       { padding: 6rem 0; }
+    #bwwb        { padding: 6rem 0; }
+    #branches    { padding: 5rem 0; }
+    #performance { padding: 6rem 0; }
+    #themes      { padding: 4rem 0; }
+    #questions   { padding: 7rem 0; }
+    #booking     { padding: 6rem 0; }
+
+    /* Grids → single column */
+    .voice-grid      { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem; }
+    .booking-inner   { grid-template-columns: 1fr; gap: 3.5rem; padding: 0 1.5rem; }
+    .perf-columns    { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-top      { grid-template-columns: 1fr; gap: 2.5rem; }
+    .bwwb-inner      { padding: 0 1.5rem; }
+
+    /* Branch items */
+    .branch-item  { grid-template-columns: 50px 1fr; gap: 1.5rem; }
     .branch-badge { display: none; }
+
+    /* BWWB media — shorter on tablet */
+    .bwwb-media { aspect-ratio: 16/9; margin-top: 3rem; }
+
+    /* Performance media */
+    .perf-media { aspect-ratio: 16/9; }
+
+    /* Section inner padding */
+    .section-inner      { padding: 0 1.5rem; }
+    .performance-inner  { padding: 0 1.5rem; }
+    .questions-center   { padding: 0 1.5rem; }
+    .footer-inner       { padding: 0 1.5rem; }
   }
+
+  /* ======================================================
+     MOBILE — 600px
+  ====================================================== */
   @media (max-width: 600px) {
-    .nav { padding: 1.25rem 1.25rem; }
-    .hero-name { font-size: 4.5rem; }
-    .form-row { grid-template-columns: 1fr; }
-    .section-inner { padding: 0 1.25rem; }
-    .voice-inner, .questions-center { padding: 0 1.25rem; }
-    .bwwb-inner, .performance-inner, .booking-inner { padding: 0 1.25rem; }
+    /* Nav */
+    .nav { padding: 1.1rem 1.25rem; }
+
+    /* Hero */
+    .hero-bg-img    { object-position: 65% 20%; }
+    .hero-veil      {
+      background: linear-gradient(
+        to bottom,
+        rgba(13,11,9,0.6) 0%,
+        rgba(13,11,9,0.35) 30%,
+        rgba(13,11,9,0.6) 70%,
+        rgba(13,11,9,0.92) 100%
+      );
+    }
+    .hero-name      { font-size: 3.8rem; line-height: 0.95; }
+    .hero-tagline   { font-size: 1rem; }
+    .hero-role      { font-size: 0.58rem; letter-spacing: 0.16em; }
+    .hero-cta       { flex-direction: column; align-items: center; gap: 1rem; margin-top: 2rem; }
+    .btn-primary, .btn-ghost { width: 100%; justify-content: center; padding: 1rem 1.5rem; }
+
+    /* Section paddings */
+    #voice       { padding: 5rem 0; }
+    #bwwb        { padding: 5rem 0; }
+    #branches    { padding: 4rem 0; }
+    #performance { padding: 5rem 0; }
+    #themes      { padding: 3.5rem 0; }
+    #questions   { padding: 5rem 0; }
+    #booking     { padding: 5rem 0; }
+
+    /* All section inner padding */
+    .section-inner, .voice-grid, .bwwb-inner,
+    .performance-inner, .booking-inner,
+    .questions-center, .footer-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+    /* Voice section — hide portrait on small screens, show text only */
+    .voice-grid { gap: 2.5rem; }
+    .voice-grid > div:first-child img { aspect-ratio: 4/3; }
+
+    /* BWWB */
+    .bwwb-title      { font-size: clamp(2.5rem, 10vw, 4rem); }
+    .bwwb-watermark  { font-size: clamp(4rem, 22vw, 8rem); }
+    .bwwb-media      { aspect-ratio: 4/3; margin-top: 2.5rem; }
+
+    /* Branches */
+    .branch-item     { grid-template-columns: 40px 1fr; gap: 1rem; padding: 1.75rem 0; }
+    .branch-num      { font-size: 1.8rem; }
+    .branch-info h3  { font-size: 1.3rem; }
+    .branch-info p   { font-size: 0.82rem; }
+
+    /* Performance */
+    .perf-media      { aspect-ratio: 4/3; margin-bottom: 3rem; }
+    .perf-pull       { font-size: 1.4rem; border-left-width: 1px; padding-left: 1.25rem; }
+
+    /* Quote break */
+    .quote-large     { font-size: 1.9rem; }
+
+    /* Themes */
+    .themes-grid     { gap: 0.6rem; }
+    .theme-chip      { font-size: 1rem; padding: 0.6rem 1.25rem; }
+
+    /* Questions */
+    .question-text   { font-size: 1.2rem; }
+    .question-item   { padding: 1.75rem 0; }
+
+    /* Booking form */
+    .form-row        { grid-template-columns: 1fr; }
+    .btn-primary[type="button"], button.btn-primary { width: 100%; justify-content: center; }
+
+    /* Footer */
+    .footer-bottom   { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+
+  /* ======================================================
+     VERY SMALL — 390px (iPhone SE / small Android)
+  ====================================================== */
+  @media (max-width: 390px) {
+    .hero-name { font-size: 3.2rem; }
+    .bwwb-title { font-size: 2.4rem; }
+    .hero-pre { letter-spacing: 0.28em; }
   }
 `;
 
@@ -1104,10 +1221,7 @@ const Voice = () => {
   const r1 = useFadeUp(), r2 = useFadeUp();
   return (
     <section id="voice">
-      <div style={{
-        maxWidth: "1140px", margin: "0 auto", padding: "0 2.5rem",
-        display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "6rem", alignItems: "center"
-      }}>
+      <div className="voice-grid">
         <div className="fade-up" ref={r1}>
           <img
             src="/about-portrait.jpg"
@@ -1123,7 +1237,7 @@ const Voice = () => {
         </div>
         <div className="fade-up" ref={r2}>
           <p className="eyebrow">Why I Tell Stories</p>
-          <blockquote className="voice-quote" style={{ textAlign: "left", fontSize: "clamp(1.6rem,3vw,2.6rem)" }}>
+          <blockquote className="voice-quote" style={{ textAlign: "left", fontSize: "clamp(1.4rem,3vw,2.6rem)" }}>
             I believe understanding how we became who we are allows us to consciously choose who we want to become.
           </blockquote>
           <div className="voice-line" style={{ margin: "2rem 0" }} />
